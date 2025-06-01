@@ -1,7 +1,7 @@
 [build]
   publish = "./"
-  
+
 [[redirects]]
   from = "/"
-  to = "/landing/"
-  status = 302
+  to = "/landing.html"
+  status = 200
