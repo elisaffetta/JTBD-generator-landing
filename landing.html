@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JTBD Generator - Автоматическая генерация Jobs To Be Done для вашего продукта</title>
+    <meta name="description" content="Революционный инструмент для генерации Jobs To Be Done с помощью ИИ. Получите 10 готовых JTBD за секунды для любого продукта или ниши.">
+    <meta property="og:title" content="JTBD Generator - ИИ для генерации Jobs To Be Done">
+    <meta property="og:description" content="Автоматически генерируйте качественные JTBD для вашего продукта с помощью передовых технологий ИИ">
+    <meta property="og:type" content="website">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif']
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .blur-overlay {
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .demo-table {
+            filter: blur(2px);
+            transition: filter 0.3s ease;
+        }
+        .demo-table:hover {
+            filter: blur(1px);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 min-h-screen font-sans">
+    <!-- Header -->
+    <header class="relative z-50 bg-white/80 backdrop-blur-md border-b border-gray-200/50 sticky top-0">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">🎯</span>
+                    </div>
+                    <span class="text-xl font-bold gradient-text">JTBD Generator</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="text-gray-600 hover:text-blue-600 transition-colors font-medium">Возможности</a>
+                    <a href="#demo" class="text-gray-600 hover:text-blue-600 transition-colors font-medium">Демо</a>
+                    <a href="#pricing" class="text-gray-600 hover:text-blue-600 transition-colors font-medium">Цена</a>
+                    <button onclick="scrollToOrder()" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all duration-300 font-medium">Получить доступ</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden py-20 lg:py-32">
+        <div class="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-purple-600/5"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center animate-fade-in">
+                <div class="inline-flex items-center px-4 py-2 bg-blue-50 rounded-full text-blue-700 text-sm font-medium mb-8">
+                    <span class="w-2 h-2 bg-blue-500 rounded-full mr-2 animate-pulse"></span>
+                    Революционный ИИ-инструмент для продакт-менеджеров
+                </div>
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+                    Генерируйте <span class="gradient-text">JTBD</span><br>
+                    за <span class="gradient-text">30 секунд</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-600 mb-12 max-w-4xl mx-auto leading-relaxed">
+                    Забудьте о часах мозгового штурма. Получите 10 качественных Jobs To Be Done для любого продукта с помощью передовых технологий ИИ
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <button onclick="scrollToOrder()" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-2xl text-lg font-semibold hover:shadow-2xl hover:scale-105 transition-all duration-300 animate-float">
+                        🚀 Получить за $9
+                    </button>
+                    <button onclick="showDemo()" class="bg-white text-gray-700 px-8 py-4 rounded-2xl text-lg font-semibold border-2 border-gray-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300">
+                        👀 Посмотреть демо
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="py-20 bg-white/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Почему это изменит вашу работу?</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Экономьте время, получайте качественные инсайты и принимайте лучшие продуктовые решения</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 animate-slide-up border border-gray-100">
+                    <div class="w-16 h-16 bg-gradient-to-r from-green-400 to-blue-500 rounded-2xl flex items-center justify-center mb-6">
+                        <span class="text-2xl">⚡</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Экономия времени</h3>
+                    <p class="text-gray-600 text-lg leading-relaxed">Вместо недель исследований получите готовые JTBD за 30 секунд. Больше времени на реализацию идей.</p>
+                </div>
+                <div class="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 animate-slide-up border border-gray-100" style="animation-delay: 0.1s">
+                    <div class="w-16 h-16 bg-gradient-to-r from-purple-400 to-pink-500 rounded-2xl flex items-center justify-center mb-6">
+                        <span class="text-2xl">🎯</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Точные инсайты</h3>
+                    <p class="text-gray-600 text-lg leading-relaxed">ИИ анализирует ваш продукт и генерирует релевантные JTBD с обоснованием и готовыми решениями.</p>
+                </div>
+                <div class="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 animate-slide-up border border-gray-100" style="animation-delay: 0.2s">
+                    <div class="w-16 h-16 bg-gradient-to-r from-orange-400 to-red-500 rounded-2xl flex items-center justify-center mb-6">
+                        <span class="text-2xl">📊</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Готовые решения</h3>
+                    <p class="text-gray-600 text-lg leading-relaxed">Получите не только JTBD, но и концепции Google Sheets инструментов и веб-приложений для каждой задачи.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="py-20 bg-gradient-to-r from-blue-50 to-purple-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Посмотрите, как это работает</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Реальный пример генерации JTBD для мобильного приложения фитнеса</p>
+            </div>
+            
+            <!-- Locked Demo Table -->
+            <div class="relative bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-200">
+                <!-- Lock Overlay -->
+                <div class="absolute inset-0 z-20 blur-overlay bg-white/30 flex items-center justify-center">
+                    <div class="text-center bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-gray-200">
+                        <div class="w-20 h-20 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <span class="text-3xl">🔒</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Полный доступ за $9</h3>
+                        <p class="text-gray-600 mb-6 max-w-md">Получите доступ к генератору и создавайте неограниченное количество JTBD для ваших продуктов</p>
+                        <button onclick="scrollToOrder()" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-2xl font-semibold hover:shadow-lg transition-all duration-300">
+                            Получить доступ
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Demo Table (Blurred) -->
+                <div class="demo-table p-6">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="bg-blue-600 text-white">
+                                    <th class="p-3 text-left font-semibold">Продукт/Ниша/ЦА</th>
+                                    <th class="p-3 text-left font-semibold">JTBD #1</th>
+                                    <th class="p-3 text-left font-semibold">Обоснование #1</th>
+                                    <th class="p-3 text-left font-semibold">Google Sheets решение #1</th>
+                                    <th class="p-3 text-left font-semibold">Веб-приложение #1</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-blue-50">
+                                    <td class="p-3 font-medium">Мобильное приложение для фитнеса, ориентированное на занятых профессионалов 25-40 лет</td>
+                                    <td class="p-3">Когда я планирую свою неделю, я хочу быстро составить эффективный план тренировок, чтобы поддерживать форму не тратя много времени на планирование</td>
+                                    <td class="p-3">Занятые профессионалы ценят свое время и нуждаются в быстром планировании. Они хотят результат без сложностей в организации тренировок.</td>
+                                    <td class="p-3">Таблица с шаблонами недельных планов тренировок, где можно выбрать уровень подготовки, доступное время и цели</td>
+                                    <td class="p-3">Веб-приложение "Быстрый план тренировок" с ИИ-помощником, который за 2 минуты создает персональный план на неделю</td>
+                                </tr>
+                                <tr class="bg-white">
+                                    <td class="p-3 font-medium"></td>
+                                    <td class="p-3">Когда у меня есть только 15-20 минут, я хочу выполнить максимально эффективную тренировку, чтобы не пропускать занятия из-за нехватки времени</td>
+                                    <td class="p-3">Короткие промежутки времени - реальность занятых людей. Важно показать, что даже 15 минут могут быть продуктивными для здоровья.</td>
+                                    <td class="p-3">База данных экспресс-тренировок с фильтрами по времени, оборудованию и группам мышц</td>
+                                    <td class="p-3">Мини-приложение "15-минутный фитнес" с таймером и готовыми комплексами упражнений</td>
+                                </tr>
+                                <tr class="bg-blue-50">
+                                    <td class="p-3 font-medium"></td>
+                                    <td class="p-3">Когда я тренируюсь дома без оборудования, я хочу разнообразные упражнения с собственным весом, чтобы не заскучать и продолжать прогрессировать</td>
+                                    <td class="p-3">Домашние тренировки стали популярны, но людям нужно разнообразие чтобы поддерживать мотивацию и избегать плато в результатах.</td>
+                                    <td class="p-3">Каталог упражнений с собственным весом, сгруппированных по сложности и целевым мышцам</td>
+                                    <td class="p-3">Приложение "Домашний тренер" с генератором тренировок и прогрессивным усложнением</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Что вы получите</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Полный набор инструментов для работы с Jobs To Be Done</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center group">
+                    <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <span class="text-3xl">🎯</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">10 готовых JTBD</h3>
+                    <p class="text-gray-600">Качественные Jobs To Be Done с правильной формулировкой</p>
+                </div>
+                <div class="text-center group">
+                    <div class="w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <span class="text-3xl">💡</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Обоснования</h3>
+                    <p class="text-gray-600">Детальное объяснение каждого JTBD и его важности</p>
+                </div>
+                <div class="text-center group">
+                    <div class="w-20 h-20 bg-gradient-to-r from-green-500 to-teal-500 rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <span class="text-3xl">📊</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Google Sheets решения</h3>
+                    <p class="text-gray-600">Концепции инструментов для каждого JTBD</p>
+                </div>
+                <div class="text-center group">
+                    <div class="w-20 h-20 bg-gradient-to-r from-orange-500 to-red-500 rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <span class="text-3xl">🌐</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Веб-приложения</h3>
+                    <p class="text-gray-600">Идеи для цифровых продуктов под каждый JTBD</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 bg-gradient-to-r from-gray-50 to-blue-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Простая и честная цена</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Один платеж - пожизненный доступ к генератору JTBD</p>
+            </div>
+            
+            <div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-200 relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-gradient-to-r from-green-400 to-blue-500 text-white px-6 py-2 rounded-bl-2xl font-semibold">
+                    Лучшее предложение
+                </div>
+                <div class="mb-8">
+                    <div class="text-6xl font-bold gradient-text mb-4">$9</div>
+                    <div class="text-gray-500 text-lg line-through mb-2">$29</div>
+                    <div class="text-xl text-gray-600">Единоразовый платеж</div>
+                </div>
+                
+                <div class="space-y-4 mb-8 text-left max-w-md mx-auto">
+                    <div class="flex items-center">
+                        <span class="text-green-500 mr-3">✓</span>
+                        <span class="text-gray-700">Неограниченная генерация JTBD</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-green-500 mr-3">✓</span>
+                        <span class="text-gray-700">Google Sheets шаблон</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-green-500 mr-3">✓</span>
+                        <span class="text-gray-700">Пожизненные обновления</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-green-500 mr-3">✓</span>
+                        <span class="text-gray-700">Техническая поддержка</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-green-500 mr-3">✓</span>
+                        <span class="text-gray-700">Инструкция по использованию</span>
+                    </div>
+                </div>
+                
+                <button onclick="scrollToOrder()" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-12 py-4 rounded-2xl text-xl font-bold hover:shadow-2xl hover:scale-105 transition-all duration-300 w-full md:w-auto">
+                    🚀 Получить доступ сейчас
+                </button>
+                
+                <div class="mt-6 text-sm text-gray-500">
+                    💳 Безопасная оплата • 🔒 Мгновенный доступ • 📧 Ссылка на email
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Form Section -->
+    <section id="order" class="py-20 bg-white">
+        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Получить доступ к JTBD Generator</h2>
+                <p class="text-xl text-gray-600">Заполните форму и получите ссылку на оплату на email</p>
+            </div>
+            
+            <form id="orderForm" class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-3xl p-8 shadow-xl border border-gray-200">
+                <div class="space-y-6">
+                    <div>
+                        <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Email адрес *</label>
+                        <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-lg" placeholder="your@email.com">
+                    </div>
+                    
+                    <div>
+                        <label for="phone" class="block text-sm font-semibold text-gray-700 mb-2">Номер телефона *</label>
+                        <input type="tel" id="phone" name="phone" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-lg" placeholder="+7 (999) 123-45-67">
+                    </div>
+                    
+                    <div>
+                        <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">Имя</label>
+                        <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-lg" placeholder="Ваше имя">
+                    </div>
+                    
+                    <div>
+                        <label for="company" class="block text-sm font-semibold text-gray-700 mb-2">Компания/Проект</label>
+                        <input type="text" id="company" name="company" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-lg" placeholder="Название компании или проекта">
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <input type="checkbox" id="agreement" name="agreement" required class="mt-1 mr-3 w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                        <label for="agreement" class="text-sm text-gray-600">
+                            Я согласен на обработку персональных данных и получение информационных сообщений
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-2xl text-xl font-bold hover:shadow-2xl hover:scale-105 transition-all duration-300">
+                        💳 Отправить заявку и получить ссылку на оплату
+                    </button>
+                </div>
+            </form>
+            
+            <div class="mt-8 text-center text-sm text-gray-500">
+                <p>После отправки формы вы получите email с инструкциями по оплате</p>
+                <p class="mt-2">Доступ к таблице будет предоставлен сразу после оплаты</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Author Section -->
+    <section class="py-20 bg-gradient-to-r from-gray-900 to-blue-900 text-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="mb-12">
+                <div class="w-24 h-24 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <span class="text-4xl font-bold">E</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Об авторе</h2>
+                <div class="text-2xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                    Elisaffetta
+                </div>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+                    Эксперт по автоматизации и внедрению ИИ в рабочие процессы. Создаю мощные инструменты для Google Workspace и веб-приложения.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                    <h3 class="text-xl font-bold mb-4">🚀 Услуги разработки:</h3>
+                    <div class="space-y-3 text-left">
+                        <div class="flex items-center">
+                            <span class="text-blue-400 mr-3">📊</span>
+                            <span>Google Apps Script для автоматизации Sheets/Docs</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-purple-400 mr-3">🤖</span>
+                            <span>Интеграция ИИ в рабочие процессы</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-green-400 mr-3">🌐</span>
+                            <span>Веб-приложения и мини-инструменты</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                    <h3 class="text-xl font-bold mb-4">⚡ Дополнительно:</h3>
+                    <div class="space-y-3 text-left">
+                        <div class="flex items-center">
+                            <span class="text-orange-400 mr-3">⚡</span>
+                            <span>Автоматизация бизнес-процессов</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-pink-400 mr-3">🔗</span>
+                            <span>API интеграции и чат-боты</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-cyan-400 mr-3">💡</span>
+                            <span>Консультации по внедрению ИИ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <a href="https://t.me/elisaffetta" target="_blank" class="inline-flex items-center bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-2xl text-lg font-semibold hover:shadow-2xl hover:scale-105 transition-all duration-300">
+                <span class="mr-3">💬</span>
+                Написать в Telegram
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-3 mb-6">
+                    <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">🎯</span>
+                    </div>
+                    <span class="text-2xl font-bold">JTBD Generator</span>
+                </div>
+                <p class="text-gray-400 mb-6">Революционный инструмент для генерации Jobs To Be Done с помощью ИИ</p>
+                <div class="border-t border-gray-800 pt-6">
+                    <p class="text-gray-500 text-sm">
+                        © 2024 JTBD Generator by Elisaffetta. Создано с ❤️ для продакт-менеджеров и предпринимателей.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Demo Modal -->
+    <div id="demoModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-6xl w-full max-h-[90vh] overflow-auto">
+            <div class="p-6 border-b border-gray-200 flex justify-between items-center">
+                <h3 class="text-2xl font-bold text-gray-900">Демо: JTBD Generator в действии</h3>
+                <button onclick="hideDemo()" class="text-gray-500 hover:text-gray-700 text-3xl">&times;</button>
+            </div>
+            <div class="p-6">
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold text-gray-900 mb-3">Пример генерации для: "Мобильное приложение для фитнеса"</h4>
+                    <div class="bg-gray-50 rounded-xl p-4 text-sm text-gray-600">
+                        Входные данные: Мобильное приложение для фитнеса, ориентированное на занятых профессионалов 25-40 лет, которые хотят поддерживать форму, но имеют ограниченное время для тренировок.
+                    </div>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm border border-gray-200 rounded-xl">
+                        <thead>
+                            <tr class="bg-blue-600 text-white">
+                                <th class="p-3 text-left font-semibold">JTBD</th>
+                                <th class="p-3 text-left font-semibold">Обоснование</th>
+                                <th class="p-3 text-left font-semibold">Google Sheets решение</th>
+                                <th class="p-3 text-left font-semibold">Веб-приложение</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-blue-50 border-b border-gray-200">
+                                <td class="p-3"><strong>JTBD #1:</strong><br>Когда я планирую свою неделю, я хочу быстро составить эффективный план тренировок, чтобы поддерживать форму не тратя много времени на планирование</td>
+                                <td class="p-3">Занятые профессионалы ценят свое время и нуждаются в быстром планировании. Они хотят результат без сложностей в организации тренировок.</td>
+                                <td class="p-3">Таблица с шаблонами недельных планов тренировок, где можно выбрать уровень подготовки, доступное время и цели</td>
+                                <td class="p-3">Веб-приложение "Быстрый план тренировок" с ИИ-помощником, который за 2 минуты создает персональный план на неделю</td>
+                            </tr>
+                            <tr class="bg-white border-b border-gray-200">
+                                <td class="p-3"><strong>JTBD #2:</strong><br>Когда у меня есть только 15-20 минут, я хочу выполнить максимально эффективную тренировку, чтобы не пропускать занятия из-за нехватки времени</td>
+                                <td class="p-3">Короткие промежутки времени - реальность занятых людей. Важно показать, что даже 15 минут могут быть продуктивными для здоровья.</td>
+                                <td class="p-3">База данных экспресс-тренировок с фильтрами по времени, оборудованию и группам мышц</td>
+                                <td class="p-3">Мини-приложение "15-минутный фитнес" с таймером и готовыми комплексами упражнений</td>
+                            </tr>
+                            <tr class="bg-blue-50 border-b border-gray-200">
+                                <td class="p-3"><strong>JTBD #3:</strong><br>Когда я тренируюсь дома без оборудования, я хочу разнообразные упражнения с собственным весом, чтобы не заскучать и продолжать прогрессировать</td>
+                                <td class="p-3">Домашние тренировки стали популярны, но людям нужно разнообразие чтобы поддерживать мотивацию и избегать плато в результатах.</td>
+                                <td class="p-3">Каталог упражнений с собственным весом, сгруппированных по сложности и целевым мышцам</td>
+                                <td class="p-3">Приложение "Домашний тренер" с генератором тренировок и прогрессивным усложнением</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="mt-6 text-center">
+                    <p class="text-gray-600 mb-4">Это только 3 из 10 JTBD, которые генерирует инструмент!</p>
+                    <button onclick="hideDemo(); scrollToOrder();" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-2xl font-semibold hover:shadow-lg transition-all duration-300">
+                        Получить полный доступ за $9
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling
+        function scrollToOrder() {
+            document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Demo modal
+        function showDemo() {
+            document.getElementById('demoModal').classList.remove('hidden');
+            document.getElementById('demoModal').classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function hideDemo() {
+            document.getElementById('demoModal').classList.add('hidden');
+            document.getElementById('demoModal').classList.remove('flex');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Form submission
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Simulate form submission
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalText = submitButton.innerHTML;
+            
+            submitButton.innerHTML = '⏳ Отправляем...';
+            submitButton.disabled = true;
+            
+            setTimeout(() => {
+                alert('✅ Заявка отправлена!\n\nСсылка на оплату будет отправлена на указанный email в течение 5 минут.\n\nПроверьте папку "Спам" если письмо не пришло.');
+                
+                submitButton.innerHTML = '✅ Заявка отправлена';
+                submitButton.style.background = 'linear-gradient(to right, #10b981, #059669)';
+                
+                // Reset form
+                setTimeout(() => {
+                    this.reset();
+                    submitButton.innerHTML = originalText;
+                    submitButton.disabled = false;
+                    submitButton.style.background = '';
+                }, 3000);
+            }, 2000);
+        });
+        
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe elements for animation
+        document.querySelectorAll('.animate-slide-up').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+        
+        // Close modal on outside click
+        document.getElementById('demoModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideDemo();
+            }
+        });
+        
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                hideDemo();
+            }
+        });
+    </script>
+</body>
+</html>
